@@ -29,14 +29,14 @@ export const signUp = yup.object().shape({
             .string().required("Password is required")
             .min(5, "Invalid password the password must be at least 5 characters long")
             .max(16, "Invalid password the password must be at most 16 characters long")
-            // .matches(
-            //   /(?=.*\d)/,
-            //   "Invalid password the password must contain at least one digit"
-            // )
-            // .matches(
-            //   /(?=.*[A-Z])/,
-            //   "Invalid password the password must contain at least one uppercase"
-            // )
+            .matches(
+              /(?=.*\d)/,
+              "Invalid password the password must contain at least one digit"
+            )
+            .matches(
+              /(?=.*[A-Z])/,
+              "Invalid password the password must contain at least one uppercase"
+            )
             .matches(
               /(?=.*[a-z])/,
               "Invalid password the password must contain at least one lowercase"

@@ -1,127 +1,35 @@
-import TextField from '@material-ui/core/TextField';
-
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-const styles = (theme) => ({
+const useStyles = makeStyles({
   root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    minWidth: 230,
   },
 });
 
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-export default function ProductDialogs() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+export default function Products(props) {
+  const { name, description, category, price, id } = props;
+  const classes = useStyles();
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Create Products
-      </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          New Products
-        </DialogTitle>
-        <DialogContent dividers>
-          <TextField  
-            autoFocus
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="name"
-            label="Name"
-            id="name"
-            autoComplete="name"
-          />
-          <TextField  
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="description"
-            label="Description"
-            id="description"
-            autoComplete="description"
-          />
-
-          
-          <TextField  
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="category"
-            label="Category"
-            id="category"
-            autoComplete="category"
-          />
-            <TextField  
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="price"
-            label="Price"
-            id="price"
-            autoComplete="price"
-          />
-
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Save products
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Card className={classes.root}>
+      <CardContent>
+        <Typography variant="h5" component="h2">
+        {name}
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {description}
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {category}
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {price}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }

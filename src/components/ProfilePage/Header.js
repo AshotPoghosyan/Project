@@ -19,30 +19,31 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+       
 
-
-
-
-        
-
-export default function ButtonAppBar() {
+export default function Header() {
   const classes = useStyles();
-   let user = JSON.parse(localStorage.getItem('loggedInUser'));
+  const user = JSON.parse(localStorage.getItem('loggedInUser'));
 
   const history = useHistory();
 
   function handleMyProducts(){
-       history.push('/myProducts')
+      const id = JSON.parse(localStorage.getItem("loggedInUser")).id
+       history.push(`/myProducts/:${id}`)
+   }
+
+   const handleAllProducts = () => {
+    history.push(`/profile`)
    }
  
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+        <div className="nameStyle">{user ? user.firstName : "Name"}</div>
+        <Button color="inherit" onClick={handleAllProducts}>All Products</Button>
           <Button color="inherit" onClick={handleMyProducts}>My Products</Button>
           <Typography variant="h6" className={classes.title}>
-            {user ? user.firstName : "Name"}
           </Typography>
           <LogOut /> 
         </Toolbar>

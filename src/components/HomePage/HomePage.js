@@ -5,9 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
-import SignIn from "../SignIn/SignIn"
-import SignUp from "../SignUp/SignUp"
-
 
 
 

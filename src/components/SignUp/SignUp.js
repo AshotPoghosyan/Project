@@ -14,7 +14,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -22,9 +22,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <a color="inherit" href="https://hihub.am/" target="_blank">
+      <p>
         Your Website
-      </a>{' '}
+      </p>
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -73,14 +73,15 @@ const validationSchema = signUp;
         localStorage.setItem('Users', JSON.stringify(users));
         props.resetForm()
         props.setSubmitting(false)
+        localStorage.setItem('loggedInUser', JSON.stringify(userData))
         handleRoute()
     }, 2000);
 }
-
-const history = useHistory();
-const handleRoute = () =>{ 
-  history.push("/profile");
-}
+    initialValues.id=uuidv4()
+    const history = useHistory();
+    const handleRoute = () =>{ 
+      history.push(`profile`);
+    }
 
   return (
    <div>
@@ -173,7 +174,7 @@ const handleRoute = () =>{
           <Grid container justifyContent="flex-end">
             <Grid item>
              
-              <Link to={'/signin'} href="#">
+              <Link to={'/signin'} >
                 Already have an account? Sign in
               </Link>
             </Grid>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Formik, Field, Form, ErrorMessage} from "formik";
 import { signIn } from '../../helper/validation';
 import { Link, useHistory } from "react-router-dom";
+import HomePage from '../HomePage/HomePage';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,9 +13,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import DescriptionAlerts from "../error";
-import HomePage from '../HomePage/HomePage';
-
+import { Alert, AlertTitle } from '@material-ui/lab';
+import Snackbar from "@material-ui/core/Snackbar";
 
 function Copyright() {
   return (
@@ -52,13 +52,17 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const [loggedInUser, setLoggedInUser] = useState(false)
+  const [openErrorModal, setOpenErrorModal] = useState(false);
+
+  const vertical = "top"
+  const horizontal = "center"
+
   const initialValues = {
       email: "",
       password: "",
       rememberMe: false
   }
 
- 
   
   const onSubmit = (values, props) => {
 
@@ -67,20 +71,21 @@ export default function SignIn() {
         for( let i = 0; i < users.length; i++){
           if(users[i].email === values.email && users[i].password === values.password ){
             setLoggedInUser(true)
-            // console.log( JSON.stringify(JSON.parse(localStorage.getItem('Users'))[i]))
             localStorage.setItem('loggedInUser', JSON.stringify(JSON.parse(localStorage.getItem('Users'))[i]))
             handleRoute()
             break;
           }
         }
-        loggedInUser ? console.log("Succsess") : console.log("Error")
+        
+        loggedInUser ? console.log("Succsess") : setOpenErrorModal(true)
           props.setSubmitting(false)
           props.resetForm()
     }, 2000);
   }
   const history = useHistory();
+
   const handleRoute = () =>{ 
-    history.push("/profile");
+    history.push(`profile`);
   }
   const validationSchema = signIn;
 
@@ -139,6 +144,19 @@ export default function SignIn() {
           >
            { props.isSubmitting? "Loading" : "Sign In"}
           </Button>
+          <Snackbar
+              open={openErrorModal}
+              autoHideDuration={8000}
+              onClose={() => setOpenErrorModal(false)} 
+              key={vertical + horizontal}
+              anchorOrigin={{ vertical, horizontal }}
+         >
+              <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                The email or password you entered is incorrect. <strong>check it out!</strong>
+              </Alert>
+
+          </Snackbar>
           <Grid container>
             <Grid item xs>      
                 Forgot password?

@@ -5,3 +5,33 @@
 .MuiFormHelperText-root {
   color: red !important;
 }
+
+.MuiCard-root {
+  margin: 15px;
+  background-color: #f3f0ec !important;
+  text-align: center;
+  /* flex-grow: 1; */
+}
+
+.productStyle {
+  display: inline-flex;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.titleStyle {
+  text-align: center;
+}
+
+.createProductStyle {
+  text-align: center;
+  margin: 20px;
+  color: white;
+}
+
+.nameStyle {
+  margin-right: 17px;
+  font-size: 28px;
+  font-family: auto;
+}
