@@ -23,7 +23,7 @@ export default function MyProducts(props) {
       description = product.description,
       category = product.category,
       price = product.price,
-      <Products name={name} description={description} category={category} price={price} /> )}) : ""
+      <Products key={i} name={name} description={description} category={category} price={price} /> )}) : ""
 
     return (
       <div> 
